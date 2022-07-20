@@ -18,7 +18,7 @@ const About = () => {
                     <p style={{color:theme.tertiary}}>{aboutData.description1}<br/><br/>{aboutData.description2}</p>
                 </div>
                 <div className='about-img'>
-                    <img src={theme.aboutimg1} alt =""/>
+                    <img src={aboutData.image} alt =""/>
                 </div>
             </div>
         </div>

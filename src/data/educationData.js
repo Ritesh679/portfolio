@@ -1,4 +1,4 @@
-export const educationData = [
+export const educationData = [    
     {
         id: 1,
         institution: 'Everest Higher Secondary School',
@@ -12,5 +12,5 @@ export const educationData = [
         course: 'Bachelor of Technology',
         startYear: '2018',
         endYear: '2022'
-    },
+    }
 ]

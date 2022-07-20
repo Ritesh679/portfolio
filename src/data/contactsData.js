@@ -1,5 +1,6 @@
 export const contactsData = {
-    email: 'ritesh.test@gmail.com',
-    phone: '+987654321078',
-    address: 'Butwal Nepal '
+    email: 'riteshofficial1102@gmail.com',
+    phone: '+9779846926361',
+    address: 'Butwal Nepal ',
+    sheetAPI :''
 }

@@ -1,5 +1,5 @@
 .myteams{
-    height: 80vh;
+    min-height: 80vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,17 +12,16 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    /* margin: 1rem; */
+    margin: 1rem;
 }
 
 .teams--bodyContainer{
-    margin-top: 50px;
-    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap:10rem;
+    gap:1rem;
+    width: 100%;
 }
 
 .teams--box{
@@ -42,4 +41,13 @@
     height: 160px;
     border-radius: 50%;
     box-shadow: inset 0 0 0 30px rgba(0, 0, 0, 0.12);
+}
+@media screen and (max-width: 992px) {
+    .teams--bodyContainer,.teams--box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
 }

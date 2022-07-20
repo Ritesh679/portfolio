@@ -5,7 +5,7 @@ import './skills.css'
 
 import { ThemeContext } from '../../contexts/ThemeContext';
 import { skillsData } from '../../data/skillsData'
-// import { skillsImage } from '../../utils/skillsImage'
+import { skillsImage } from '../../utils/skillsImage'
 
 function Skills() {
 
@@ -34,7 +34,7 @@ function Skills() {
                     >
                         {skillsData.map((skill, id) => (
                             <div className="skill--box" key={id} style={skillBoxStyle}>
-                                {/* <img src={skillsImage(skill)} alt={skill} /> */}
+                                <img src={skillsImage(skill)} alt={skill} />
                                 <h3 style={{color:theme.tertiary}}>
                                     {skill}
                                 </h3>

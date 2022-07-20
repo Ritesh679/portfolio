@@ -15,6 +15,8 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import { IconButton, Snackbar, SnackbarContent } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close'; 
+import axios from 'axios';
+import {isEmail} from 'validator';
 
 const Contact = () => {
     const {theme} = useContext(ThemeContext);
@@ -117,20 +119,32 @@ const Contact = () => {
     const handleContactForm =(e)=>{
         e.preventDefault();
         if(name && email && message){
-            // if(isEmail(email)){
-            if((email)){
+            if(isEmail(email)){
                 const responseData = {
                     name:name,
                     email:email,
                     message:message,
                 }
-                alert('Message Sent')
-                setSuccess(true)
-            }
+                axios.post(contactsData.sheetAPI,responseData).then((res)=>{
+                    console.log('success')
+                    setSuccess(true)
+                    setErrMsg('')
+                    setName('');
+                    setEmail('');
+                    setMessage('')
+                    setOpen(false)
+                });
+        }else{
+            setErrMsg('Invalid email')
+            setOpen(true)
         }
+    }else{
+        setErrMsg('Enter all the fields');
+        setOpen(true)
+    }
     }
     return (
-        <div className='contacts' id='contacts' style={{backgroundColor:theme.secondary}}>            
+        <div className='contacts' id='contact' style={{backgroundColor:theme.secondary}}>            
             <div className='contacts--container'>
 
                 <h1 style={{color:theme.primary}}>Contact</h1>
@@ -295,4 +309,5 @@ const Contact = () => {
     );
 }
 
-export default Contact;
+
+export default Contact

@@ -1,19 +1,94 @@
-import React, { useState } from 'react';
-import {Nav, NavContainer, NavLinkContainer } from './Navbar.elements'
+import React, { useContext, useState } from 'react';
 import {NavHashLink} from 'react-router-hash-link'
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import CloseIcon from '@mui/icons-material/Close'
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person'; 
-import DescriptionIcon from '@mui/icons-material/Description';
-import SettingsIcon from '@mui/icons-material/Settings';
-import FolderIcon from '@mui/icons-material/Folder';
+import SchoolIcon from '@mui/icons-material/School';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import GroupsIcon from '@mui/icons-material/Groups';
 import CallIcon from '@mui/icons-material/Call';
 import { Drawer} from '@mui/material';
 import Fade from 'react-reveal/Fade'
+import {ThemeContext} from '../../contexts/ThemeContext'
+import {makeStyles} from '@mui/styles'
+import './Navbar.css'
 
 const Navbar = () => {
     const [open,setOpen] = useState(false)
+    const {theme} = useContext(ThemeContext);
+    const useStyles = makeStyles((t)=>({
+        navMenu:{
+            fontSize: '2.5rem',
+            color: theme.tertiary,
+            cursor: 'pointer',
+            transform: 'translateY(-10px)',
+            transition: 'color 0.3s',
+            '&:hover': {
+                color: theme.primary,
+            },
+            // [t.breakpoints.down('sm')]: {
+            //     fontSize: '2.5rem',
+            // },
+            // [t.breakpoints.down('xs')]: {
+            //     fontSize: '2rem',
+            // },
+        },
+        drawerItem: {
+            margin: '2rem auto',
+            borderRadius: '78.8418px',
+            background: theme.secondary,
+            color: theme.primary,
+            width: '85%',
+            height: '60px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-evenly',
+            padding: '0 30px',
+            boxSizing: 'border-box',
+            border: '2px solid',
+            borderColor: theme.primary,
+            transition: 'background-color 0.2s, color 0.2s',
+            '&:hover': {
+                background: theme.primary,
+                color: theme.secondary,
+            },
+            // [t.breakpoints.down('sm')]: {
+            //     width: '100%',
+            //     padding: '0 25px',
+            //     height: '55px',
+            // },
+        },
+        MuiDrawer: {
+            padding: '0em 1.8em',
+            width: '14em',
+            fontFamily: ' var(--primaryFont)',
+            fontStyle: ' normal',
+            fontWeight: ' normal',
+            fontSize: ' 24px',
+            background: theme.secondary,
+            overflow: 'hidden',
+            borderTopRightRadius: '40px',
+            borderBottomRightRadius: '40px',
+        //     [t.breakpoints.down('sm')]: {
+        //         width: '12em',
+        //     },
+        },
+        closebtnIcon:{
+            fontSize: '2rem',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            color: theme.primary,
+            position: 'absolute',
+            right: 40,
+            top: 40,
+            transition: 'color 0.2s',
+            '&:hover': {
+                color: theme.tertiary,
+            },
+        }
+    }))
+    const classes=useStyles();
     const handleDrawerOpen = ()=>{
         setOpen(true)
     }
@@ -21,20 +96,20 @@ const Navbar = () => {
         setOpen(false);
     }
     return (
-        <Nav>
-            <NavContainer>
-                <h1 style={{color:'red'}}>
-                    Ritesh
+        <div className='navbar'>
+            <div className='navbar--container'>
+                <h1 style={{color:theme.secondary}}>
+                𝕽𝖎𝖙𝖊𝖘𝖍
                 </h1>
-                <DensityMediumIcon onClick = {handleDrawerOpen} aria-label='Menu' />
-            </NavContainer>
+                <DensityMediumIcon className={classes.navMenu} onClick = {handleDrawerOpen} aria-label='Menu' />
+            </div>
             <Drawer variant='temporary' onClose={(event,reason)=>{
                 if(reason!=='backdropClick'){
                     handleDrawerClose();
                 }else if(reason!=='escapeKeyDown'){
                     handleDrawerClose()
                 }
-            }} anchor='left' open={open} className='drawer' disableScrollLock={true}>
+            }} anchor='left' open={open} classes={{paper:classes.MuiDrawer}} className='drawer' disableScrollLock={true}>
                 <div className='div-closebtn'>
                     <CloseIcon onClick={handleDrawerClose} onKeyDown={(e)=>{
                         if(e.key===' '|| e.key==='Enter'){
@@ -45,10 +120,10 @@ const Navbar = () => {
                 </div>
                 <br/>
                 <div onClick={handleDrawerClose}>
-                    <NavLinkContainer>
+                    <div className='navLink--container'>
                         <Fade left>
                             <NavHashLink to ='/' smooth='true' duration={2000}>
-                                <div>
+                                <div className={classes.drawerItem}>
                                     <HomeIcon/>
                                     <span>Home</span>
                                 </div>
@@ -56,7 +131,7 @@ const Navbar = () => {
                         </Fade>
                         <Fade left>
                             <NavHashLink to ='/#about' smooth='true' duration={2000}>
-                                <div>
+                                <div className={classes.drawerItem}>
                                     <PersonIcon/>
                                     <span>About</span>
                                 </div>
@@ -64,40 +139,40 @@ const Navbar = () => {
                         </Fade>
                         <Fade left>
                             <NavHashLink to ='/#resume' smooth='true' duration={2000}>
-                                <div>
-                                    <DescriptionIcon/>
-                                    <span>Resume</span>
+                                <div className={classes.drawerItem}>
+                                    <SchoolIcon/>
+                                    <span>Education</span>
                                 </div>
                             </NavHashLink>
                         </Fade>
                         <Fade left>
                             <NavHashLink to ='/#services' smooth='true' duration={2000}>
-                                <div>
-                                    <SettingsIcon/>
-                                    <span>Services</span>
+                                <div className={classes.drawerItem}>
+                                    <AccountTreeIcon/>
+                                    <span>Projects</span>
                                 </div>
                             </NavHashLink>
                         </Fade>
                         <Fade left>
                             <NavHashLink to ='/#blog' smooth='true' duration={2000}>
-                                <div>
-                                    <FolderIcon/>
-                                    <span>Blog</span>
+                                <div className={classes.drawerItem}>
+                                    <GroupsIcon/>
+                                    <span>Teams</span>
                                 </div>
                             </NavHashLink>
                         </Fade>
                         <Fade left>
                             <NavHashLink to ='/#contact' smooth='true' duration={2000}>
-                                <div>
+                                <div className={classes.drawerItem}>
                                     <CallIcon/>
                                     <span>Contact</span>
                                 </div>
                             </NavHashLink>
                         </Fade>
-                    </NavLinkContainer>
+                    </div>
                 </div>
             </Drawer>
-        </Nav>
+        </div>
     );
 }
 
